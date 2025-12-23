@@ -1,0 +1,144 @@
+@charset "UTF-8";
+ body {
+            background: #0f172a;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; 
+            padding: 16px; 
+        }
+
+        .login-card {
+            background: #1e293b;
+            width: 100%; 
+            max-width: 420px;
+          	padding: 48px;
+    		border-radius: 50px;	
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            transform: scale(1);
+            transition: transform .25s ease, box-shadow .25s ease;
+            position: relative;
+            z-index: 2;
+            margin: 0 auto; 
+        }
+
+        /* card hơi phóng nhẹ khi focus vào input */
+        .login-card.focused {
+            transform: scale(1.02);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.55);
+        }
+
+        /* animation khi login thành công (phóng to rồi biến mất) */
+        .login-card.login-anim {
+            animation: loginZoom .7s forwards ease-out;
+        }
+
+        @keyframes loginZoom {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            60% {
+                transform: scale(1.3);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3.5);
+                opacity: 0;
+            }
+        }
+
+        .form-control {
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            color: #fff;
+        }
+        .form-control:focus {
+            color: #fff;
+            background: #0f172a;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 1px #6366f1;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            border-radius: 25px;
+            background: linear-gradient(135deg,#4f46e5,#7c3aed);
+            border: none;
+            color: white;
+            font-weight: 600;
+        }
+        .btn-login:hover {
+            filter: brightness(1.1);
+        }
+
+        /* overlay loading phủ toàn màn hình */
+        .login-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(15,23,42,0.9), #020617);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .4s ease;
+            z-index: 5;
+        }
+        .login-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .loading-box {
+            text-align: center;
+        }
+        .loading-box .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+        .loading-box p {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #e5e7eb;
+        }
+
+
+        @media (max-width: 576px) {
+            body {
+                padding: 12px;
+            }
+
+            .login-card {
+                padding: 22px 18px;
+                border-radius: 12px;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .loading-box .spinner-border {
+                width: 2.3rem;
+                height: 2.3rem;
+            }
+
+            .loading-box p {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (min-width: 577px) and (max-width: 1024px) {
+            /* iPad / tablet */
+            body {
+                padding: 24px;
+            }
+
+            .login-card {
+                padding: 28px 26px;
+                max-width: 450px;
+            }
+        }

@@ -1,0 +1,232 @@
+@charset "UTF-8";
+	  :root {
+            --bg-main: #020617;
+            --bg-card: #0b1120;
+            --text-main: #e5e7eb;
+            --text-muted: #94a3b8;
+            --border-subtle: #1f2937;
+            --primary: #6366f1;
+        }
+        body {
+            margin: 0;
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-family: system-ui, sans-serif;
+        }
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR (PC) */
+        .sidebar {
+            width: 240px;
+            padding: 16px;
+            background: var(--bg-main);
+            border-right: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            gap: 6px;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+        .sidebar-title i {
+            color: var(--primary);
+        }
+        .side-link {
+            padding: 8px 12px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+            text-decoration: none;
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .side-link:hover, .side-link.active {
+            background: rgba(99,102,241,0.25);
+            color: var(--text-main);
+        }
+
+        /* SIDEBAR MOBILE */
+        .mobile-toggle {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+        .sidebar-mobile {
+            position: fixed;
+            left: -260px;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: #0b1120;
+            border-right: 1px solid var(--border-subtle);
+            padding: 16px;
+            transition: .35s;
+            z-index: 2000;
+        }
+        .sidebar-mobile.show {
+            left: 0;
+        }
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            display: none;
+            z-index: 1500;
+        }
+        .mobile-overlay.show {
+            display: block;
+        }
+
+        /* MAIN */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .topbar {
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(15,23,42,0.7);
+            backdrop-filter: blur(8px);
+        }
+        .avatar-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: radial-gradient(circle at top, #4f46e5, #1d2448);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .content {
+            padding: 22px;
+        }
+
+        /* METRICS */
+        .metric-card {
+            padding: 16px;
+            background: var(--bg-card);
+            border-radius: 14px;
+            border: 1px solid var(--border-subtle);
+        }
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .metric-value {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        /* SPOTLIGHT */
+        .spot-panel {
+            background: radial-gradient(circle at top, #111827, #020617);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid var(--border-subtle);
+            margin-top: 22px;
+            position: relative;
+        }
+        .spot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .spot-stage {
+            height: 330px;
+            position: relative;
+            margin-top: 12px;
+        }
+        .spot-item {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            opacity: 0;
+            transition: .35s;
+        }
+        .spot-item img {
+            width: 240px;
+            height: 330px;
+            border-radius: 18px;
+            object-fit: cover;
+        }
+        .spot-center {
+            transform: translateX(-50%) scale(1.18);
+            opacity: 1 !important;
+            z-index: 10;
+            filter: brightness(1.12);
+            box-shadow: 0 0 30px rgba(129,140,248,0.7);
+        }
+        .spot-left-pos {
+            transform: translateX(-50%) translateX(-220px) scale(.85) rotateY(15deg);
+            opacity: 0.8;
+        }
+        .spot-right-pos {
+            transform: translateX(-50%) translateX(220px) scale(.85) rotateY(-15deg);
+            opacity: 0.8;
+        }
+        .spot-hidden {
+            opacity: 0;
+            transform: translateX(-50%) scale(.6);
+        }
+
+        .spot-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: #ef444400;
+            color: #fff;
+            z-index: 20;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.9);
+        }
+        .spot-btn-left { left: 10px; }
+        .spot-btn-right { right: 10px; }
+
+        /* LATEST BOOKINGS */
+        .booking-grid {
+            margin-top: 26px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+        }
+        .booking-card {
+            background: var(--bg-card);
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid var(--border-subtle);
+        }
+        .bk-status {
+            margin-top: 6px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            display: inline-block;
+        }
+        .bk-paid { background: rgba(34,197,94,0.3); color: #22c55e; }
+        .bk-pending { background: rgba(245,158,11,0.3); color: #f59e0b; }
+        .bk-cancelled { background: rgba(239,68,68,0.3); color: #ef4444; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .mobile-toggle { display: block; }
+            
+        }
