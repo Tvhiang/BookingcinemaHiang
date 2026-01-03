@@ -87,7 +87,7 @@ public class AdminHomeServlet extends HttpServlet {
 					// giảm dần
 					return Integer.compare(cb, ca);
 				});
-				
+
 				if (hotMovies.size() > 10) {
 					hotMovies = hotMovies.subList(0, 10);
 				}

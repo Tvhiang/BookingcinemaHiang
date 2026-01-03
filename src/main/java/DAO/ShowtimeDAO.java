@@ -1,6 +1,7 @@
 package DAO;
 
 import model.Showtime;
+import model.ShowtimeView;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -162,6 +163,36 @@ public class ShowtimeDAO {
 		return list;
 	}
 
+    // Lấy lịch chiếu theo movie (JOIN room để lấy room_name)
+	public List<ShowtimeView> findByMovie(int movieId) {
+	    List<ShowtimeView> list = new ArrayList<>();
+	    String sql = """
+	        SELECT s.showtime_id, s.room_id, r.room_name, s.show_date, s.base_price
+	        FROM showtimes s
+	        JOIN rooms r ON s.room_id = r.room_id
+	        WHERE s.movie_id = ?
+	          AND s.is_active = TRUE
+	          AND s.show_date >= NOW()
+	        ORDER BY s.show_date ASC
+	    """;
+
+	    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setInt(1, movieId);
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            ShowtimeView v = new ShowtimeView();
+	            v.setShowtimeId(rs.getInt("showtime_id"));
+	            v.setRoomId(rs.getInt("room_id"));
+	            v.setRoomName(rs.getString("room_name"));
+	            v.setShowDate(rs.getTimestamp("show_date"));
+	            v.setBasePrice(rs.getBigDecimal("base_price"));
+	            list.add(v);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return list;
+	}
 	// =========================================================
 	// 7. Map dữ liệu từ ResultSet -> Showtime
 	// =========================================================
